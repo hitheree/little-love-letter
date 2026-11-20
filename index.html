@@ -1,375 +1,400 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Love Letter Club ♡</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
 
-:root {
-  --pink: #f4b6c8;
-  --pink2: #fff0f5;
-  --dark: #754455;
-  --paper: #fffaf7;
+:root{
+  --pink:#f4b6c8;
+  --pink2:#fff0f5;
+  --dark:#754455;
+  --paper:#fffaf7;
 }
 
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
 
-body {
-  margin: 0;
-  font-family: 'DM Sans', sans-serif;
-  background: #fff4f7;
-  color: var(--dark);
-  min-height: 100vh;
-  overflow-x: hidden;
+body{
+  margin:0;
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(135deg,#fff5f7,#fdeaf1,#fff7f3);
+  color:var(--dark);
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
-button, input, textarea { font: inherit; }
+button,input,textarea{font:inherit}
+button{cursor:pointer;transition:.25s}
+button:hover{transform:translateY(-2px)}
 
-button {
-  cursor: pointer;
-  border: none;
-  transition: .25s;
+.bg-hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
 }
 
-button:hover { transform: translateY(-2px); }
-
-.bg-hearts {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
+.heart{
+  position:absolute;
+  color:#e9a5bc;
+  opacity:.4;
+  animation:float 6s ease-in-out infinite;
 }
 
-.heart {
-  position: absolute;
-  color: #f4b6c8;
-  opacity: .4;
-  animation: float 6s ease-in-out infinite;
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%{transform:translateY(-20px) rotate(10deg)}
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-20px) rotate(10deg); }
+.container{
+  position:relative;
+  z-index:1;
+  max-width:760px;
+  margin:auto;
+  padding:35px 20px 70px;
 }
 
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 760px;
-  margin: auto;
-  padding: 35px 20px 70px;
+.header{text-align:center;margin-bottom:30px}
+
+.tag{
+  display:inline-block;
+  background:white;
+  border:1px solid #f3d5df;
+  border-radius:50px;
+  padding:8px 16px;
+  font-size:12px;
+  letter-spacing:1px;
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 30px;
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(35px,8vw,55px);
+  font-weight:500;
+  margin:18px 0 10px;
 }
 
-.tag {
-  display: inline-block;
-  background: white;
-  border: 1px solid #f3d5df;
-  border-radius: 50px;
-  padding: 7px 15px;
-  font-size: 12px;
-  letter-spacing: 1px;
+.header p{
+  color:#a8798a;
+  font-size:14px;
 }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(35px, 8vw, 55px);
-  font-weight: 500;
-  margin: 18px 0 10px;
+.card{
+  background:rgba(255,255,255,.88);
+  border:1px solid #f3d9e1;
+  border-radius:24px;
+  padding:27px;
+  box-shadow:0 12px 35px rgba(174,105,129,.08);
 }
 
-.header p {
-  color: #a8798a;
-  font-size: 14px;
+label{
+  display:block;
+  margin:18px 0 8px;
+  font-size:13px;
+  font-weight:600;
 }
 
-.card {
-  background: rgba(255,255,255,.85);
-  border: 1px solid #f3d9e1;
-  border-radius: 24px;
-  padding: 27px;
-  box-shadow: 0 12px 35px rgba(174,105,129,.08);
+label:first-child{margin-top:0}
+
+input,textarea{
+  width:100%;
+  background:#fff9fb;
+  border:1px solid #efd5de;
+  border-radius:14px;
+  padding:14px;
+  outline:none;
+  color:var(--dark);
+  transition:.2s;
 }
 
-label {
-  display: block;
-  margin: 18px 0 8px;
-  font-size: 13px;
-  font-weight: 600;
+input:focus,textarea:focus{
+  border-color:#d68ba6;
+  box-shadow:0 0 0 3px #fbe5ed;
 }
 
-label:first-child { margin-top: 0; }
-
-input, textarea {
-  width: 100%;
-  background: #fff9fb;
-  border: 1px solid #efd5de;
-  border-radius: 14px;
-  padding: 14px;
-  outline: none;
-  color: var(--dark);
-  transition: .2s;
+textarea{
+  resize:vertical;
+  min-height:160px;
+  line-height:1.8;
 }
 
-input:focus, textarea:focus {
-  border-color: #d68ba6;
-  box-shadow: 0 0 0 3px #fbe5ed;
+input[type=file]{padding:12px}
+
+.preview{
+  display:none;
+  max-width:220px;
+  max-height:250px;
+  object-fit:cover;
+  border-radius:18px;
+  margin-top:12px;
+  border:3px solid white;
+  box-shadow:0 4px 14px #efd5de;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 160px;
-  line-height: 1.8;
+.btn{
+  width:100%;
+  background:#d987a6;
+  color:white;
+  padding:15px;
+  border-radius:15px;
+  margin-top:24px;
+  font-weight:600;
+  box-shadow:0 5px 14px #e9c4d2;
 }
 
-input[type=file] { padding: 12px; }
-
-.preview {
-  display: none;
-  max-width: 200px;
-  max-height: 220px;
-  object-fit: cover;
-  border-radius: 18px;
-  margin-top: 12px;
-  border: 3px solid white;
-  box-shadow: 0 4px 14px #efd5de;
+.btn.secondary{
+  background:white;
+  color:var(--dark);
+  border:1px solid #efd5de;
+  box-shadow:none;
 }
 
-.btn {
-  width: 100%;
-  background: #d987a6;
-  color: white;
-  padding: 15px;
-  border-radius: 15px;
-  margin-top: 24px;
-  font-weight: 600;
-  box-shadow: 0 5px 14px #e9c4d2;
+.small{
+  font-size:12px;
+  color:#b18b9a;
+  line-height:1.7;
+  margin-top:10px;
 }
 
-.btn.secondary {
-  background: white;
-  color: var(--dark);
-  border: 1px solid #efd5de;
-  box-shadow: none;
+.footer{
+  text-align:center;
+  margin-top:25px;
+  font-size:12px;
+  color:#bc91a0;
 }
 
-.small {
-  font-size: 12px;
-  color: #b18b9a;
-  line-height: 1.7;
-  margin-top: 10px;
+.hidden{display:none!important}
+
+/* MUSIC BUTTON */
+
+.music-btn{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  z-index:20;
+  background:#fff;
+  color:#a65e7c;
+  border:1px solid #f1d3df;
+  border-radius:50px;
+  padding:12px 16px;
+  box-shadow:0 5px 20px rgba(170,105,130,.12);
+  font-size:13px;
 }
 
-.footer {
-  text-align: center;
-  margin-top: 25px;
-  font-size: 12px;
-  color: #bc91a0;
+.music-btn.playing{
+  background:#d987a6;
+  color:white;
 }
 
-.hidden { display: none !important; }
-
-/* LETTER VIEW */
-
-.letter-view {
-  text-align: center;
-  padding-top: 10px;
+.music-note{
+  display:inline-block;
+  animation:musicFloat 1s infinite alternate;
 }
 
-.letter-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 35px;
-  font-weight: 500;
-  margin: 10px 0;
+@keyframes musicFloat{
+  from{transform:translateY(0)}
+  to{transform:translateY(-3px)}
 }
 
-.envelope-area {
-  margin: 45px auto 25px;
-  height: 230px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1000px;
+/* LETTER */
+
+.letter-view{text-align:center;padding-top:10px}
+
+.letter-title{
+  font-family:'Playfair Display',serif;
+  font-size:35px;
+  font-weight:500;
+  margin:10px 0;
 }
 
-.envelope {
-  width: 290px;
-  height: 185px;
-  position: relative;
-  cursor: pointer;
-  transition: transform .3s;
-  filter: drop-shadow(0 15px 20px rgba(177,105,130,.18));
+.envelope-area{
+  margin:45px auto 25px;
+  height:230px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1000px;
 }
 
-.envelope:hover { transform: translateY(-5px); }
-
-.envelope-base {
-  position: absolute;
-  inset: 0;
-  background: #e9a8bc;
-  border-radius: 8px;
-  overflow: hidden;
+.envelope{
+  width:290px;
+  height:185px;
+  position:relative;
+  cursor:pointer;
+  transition:transform .3s;
+  filter:drop-shadow(0 15px 20px rgba(177,105,130,.18));
 }
 
-.envelope-base:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #f4c2d1, #d989a7);
-  clip-path: polygon(0 0,50% 60%,100% 0);
-  z-index: 2;
+.envelope:hover{transform:translateY(-5px)}
+
+.envelope-base{
+  position:absolute;
+  inset:0;
+  background:#e9a8bc;
+  border-radius:8px;
+  overflow:hidden;
 }
 
-.envelope-base:after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #f3c5d3;
-  clip-path: polygon(0 100%,50% 50%,100% 100%);
-  z-index: 3;
+.envelope-base:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,#f4c2d1,#d989a7);
+  clip-path:polygon(0 0,50% 60%,100% 0);
+  z-index:2;
 }
 
-.flap {
-  position: absolute;
-  inset: 0;
-  background: #f4c5d4;
-  clip-path: polygon(0 0,100% 0,50% 58%);
-  transform-origin: top;
-  transition: transform .7s;
-  z-index: 4;
+.envelope-base:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#f3c5d3;
+  clip-path:polygon(0 100%,50% 50%,100% 100%);
+  z-index:3;
 }
 
-.seal {
-  position: absolute;
-  top: 78px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  background: #c56889;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 22px;
-  box-shadow: 0 3px 8px #be7892;
-  transition: .4s;
+.flap{
+  position:absolute;
+  inset:0;
+  background:#f4c5d4;
+  clip-path:polygon(0 0,100% 0,50% 58%);
+  transform-origin:top;
+  transition:transform .7s;
+  z-index:4;
 }
 
-.envelope.open .flap {
-  transform: rotateX(180deg);
-  z-index: 1;
+.seal{
+  position:absolute;
+  top:78px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:5;
+  background:#c56889;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:white;
+  font-size:22px;
+  box-shadow:0 3px 8px #be7892;
+  transition:.4s;
 }
 
-.envelope.open .seal {
-  opacity: 0;
-  transform: translateX(-50%) scale(.4);
+.envelope.open .flap{
+  transform:rotateX(180deg);
+  z-index:1;
 }
 
-.tap-text {
-  font-size: 13px;
-  color: #b47c91;
-  animation: pulse 1.5s infinite;
+.envelope.open .seal{
+  opacity:0;
+  transform:translateX(-50%) scale(.4);
 }
 
-@keyframes pulse {
-  50% { opacity: .5; }
+.tap-text{
+  font-size:13px;
+  color:#b47c91;
+  animation:pulse 1.5s infinite;
 }
 
-.paper {
-  display: none;
-  margin-top: 20px;
-  text-align: left;
-  background: #fffdf9;
-  padding: 30px 25px;
-  border-radius: 8px;
-  border: 1px solid #f1dfd5;
-  box-shadow: 0 10px 35px rgba(153,110,120,.12);
-  position: relative;
-  animation: appear .8s;
+@keyframes pulse{
+  50%{opacity:.5}
 }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+.paper{
+  display:none;
+  margin-top:20px;
+  text-align:left;
+  background:#fffdf9;
+  padding:30px 25px;
+  border-radius:8px;
+  border:1px solid #f1dfd5;
+  box-shadow:0 10px 35px rgba(153,110,120,.12);
+  position:relative;
+  animation:appear .8s;
 }
 
-.paper:before {
-  content: "♡";
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  color: #e8b4c5;
+@keyframes appear{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.paper h2 {
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-  font-weight: 500;
-  font-size: 28px;
-  margin: 15px 0;
+.paper:before{
+  content:"♡";
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  color:#e8b4c5;
 }
 
-.paper .to {
-  font-size: 13px;
-  text-align: center;
-  color: #bc8297;
-  margin-bottom: 25px;
+.paper h2{
+  font-family:'Playfair Display',serif;
+  text-align:center;
+  font-weight:500;
+  font-size:28px;
+  margin:15px 0;
 }
 
-.paper-text {
-  white-space: pre-wrap;
-  line-height: 2;
-  font-size: 15px;
-  overflow-wrap: anywhere;
+.paper .to{
+  font-size:13px;
+  text-align:center;
+  color:#bc8297;
+  margin-bottom:25px;
 }
 
-.paper-photo {
-  display: block;
-  width: 100%;
-  max-width: 400px;
-  max-height: 420px;
-  object-fit: contain;
-  border-radius: 12px;
-  margin: 20px auto;
-  background: #fff5f7;
+.paper-text{
+  white-space:pre-wrap;
+  line-height:2;
+  font-size:15px;
+  overflow-wrap:anywhere;
 }
 
-.signature {
-  text-align: right;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 20px;
-  margin-top: 25px;
+.paper-photo{
+  display:block;
+  width:100%;
+  max-width:400px;
+  max-height:420px;
+  object-fit:contain;
+  border-radius:12px;
+  margin:20px auto;
+  background:#fff5f7;
 }
 
-.opened { display: block; }
+.signature{
+  text-align:right;
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:20px;
+  margin-top:25px;
+}
 
-@media(max-width:500px) {
-  .container { padding: 25px 15px 50px; }
-  .card { padding: 20px; }
-  .envelope { width: 260px; }
-  .paper { padding: 25px 18px; }
+.opened{display:block}
+
+@media(max-width:500px){
+  .container{padding:25px 15px 50px}
+  .card{padding:20px}
+  .envelope{width:260px}
+  .paper{padding:25px 18px}
 }
 </style>
 </head>
 
 <body>
+
 <div class="bg-hearts" id="hearts"></div>
+
+<button class="music-btn" id="musicBtn">
+  <span class="music-note">♫</span> Play soft piano
+</button>
 
 <div class="container">
 
-<!-- FORM PEMBUAT SURAT -->
+<!-- PEMBUAT SURAT -->
+
 <div id="creator">
   <div class="header">
     <span class="tag">♡ A LITTLE CORNER OF LOVE ♡</span>
@@ -378,6 +403,7 @@ input[type=file] { padding: 12px; }
   </div>
 
   <div class="card">
+
     <label>From ♡ Nama pengirim</label>
     <input id="sender" placeholder="Nama kamu..." maxlength="80">
 
@@ -389,23 +415,30 @@ input[type=file] { padding: 12px; }
 
     <label>Add a picture ♡</label>
     <input id="photo" type="file" accept="image/*">
+
     <img id="preview" class="preview">
 
     <p class="small">
-      Foto akan diperkecil secara otomatis supaya link lebih mudah dibagikan.
+      Foto akan diperkecil secara otomatis supaya link lebih ringan.
     </p>
 
-    <button class="btn" id="createBtn">Seal my letter ♡</button>
+    <button class="btn" id="createBtn">
+      Seal my letter ♡
+    </button>
+
     <p class="small">
-      Surat dibuat menjadi link berbagi. Siapa pun yang memiliki link dapat membacanya.
+      Surat dapat dibaca siapa pun yang memiliki link.
     </p>
+
   </div>
 
   <div class="footer">made with love & little pink hearts ♡</div>
 </div>
 
-<!-- HASIL LINK -->
+<!-- HASIL -->
+
 <div id="result" class="hidden">
+
   <div class="header">
     <span class="tag">♡ YOUR LETTER IS READY ♡</span>
     <h1>It's a little secret!</h1>
@@ -413,38 +446,66 @@ input[type=file] { padding: 12px; }
   </div>
 
   <div class="card">
+
     <input id="shareLink" readonly>
-    <button class="btn" id="copyBtn">Copy my letter link ♡</button>
-    <button class="btn secondary" id="openBtn">Preview the letter</button>
-    <button class="btn secondary" id="backBtn">Make another letter</button>
+
+    <button class="btn" id="copyBtn">
+      Copy my letter link ♡
+    </button>
+
+    <button class="btn secondary" id="openBtn">
+      Preview the letter
+    </button>
+
+    <button class="btn secondary" id="backBtn">
+      Make another letter
+    </button>
+
     <p class="small">
-      Save this link. If you lose it, the letter cannot be retrieved from GitHub alone.
+      Keep your link safe. The letter is stored inside the link itself.
     </p>
+
   </div>
 </div>
 
-<!-- SURAT PENERIMA -->
+<!-- PENERIMA -->
+
 <div id="reader" class="hidden letter-view">
+
   <span class="tag">♡ A LETTER FOR YOU ♡</span>
-  <h1 class="letter-title">Someone wrote you a letter.</h1>
+
+  <h1 class="letter-title">
+    Someone wrote you a letter.
+  </h1>
+
   <p id="greeting"></p>
 
   <div class="envelope-area">
+
     <div class="envelope" id="envelope">
       <div class="envelope-base"></div>
       <div class="flap"></div>
       <div class="seal">♡</div>
     </div>
+
   </div>
 
-  <p class="tap-text" id="tapText">tap the envelope to open ♡</p>
+  <p class="tap-text" id="tapText">
+    tap the envelope to open ♡
+  </p>
 
   <div class="paper" id="paper">
+
     <h2>A letter for you ♡</h2>
+
     <div class="to" id="paperTo"></div>
+
     <img id="paperPhoto" class="paper-photo hidden">
+
     <div id="paperText" class="paper-text"></div>
+
     <div class="signature" id="signature"></div>
+
   </div>
 
   <button class="btn secondary" id="closeLetter" style="max-width:300px;margin:25px auto">
@@ -452,15 +513,20 @@ input[type=file] { padding: 12px; }
   </button>
 
   <div class="footer">you are someone's little favorite ♡</div>
+
 </div>
 
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
 
-const hearts = $("hearts");
-for(let i=0;i<22;i++){
+/* DECORATION */
+
+const $=id=>document.getElementById(id);
+
+const hearts=$("hearts");
+
+for(let i=0;i<24;i++){
   let h=document.createElement("div");
   h.className="heart";
   h.textContent=["♡","♥","✧","୨ৎ"][i%4];
@@ -471,12 +537,150 @@ for(let i=0;i<22;i++){
   hearts.appendChild(h);
 }
 
-let photoData = "";
-let currentLetter = null;
+/* ORIGINAL SYNTHETIC PIANO MUSIC */
 
-$("photo").addEventListener("change", async e=>{
+let audioCtx=null;
+let musicPlaying=false;
+let musicTimer=null;
+let musicStep=0;
+
+const musicBtn=$("musicBtn");
+
+/* Original melody and chord progression.
+   No external song or audio file is used. */
+
+const melody=[
+  [523.25,0],
+  [659.25,0],
+  [783.99,0],
+  [659.25,0],
+
+  [587.33,0],
+  [698.46,0],
+  [880.00,0],
+  [698.46,0],
+
+  [523.25,0],
+  [659.25,0],
+  [783.99,0],
+  [1046.50,0],
+
+  [783.99,0],
+  [698.46,0],
+  [659.25,0],
+  [587.33,0]
+];
+
+/* Gentle chord background */
+
+const chords=[
+  [261.63,329.63,392.00],
+  [220.00,261.63,329.63],
+  [174.61,220.00,261.63],
+  [196.00,246.94,293.66]
+];
+
+function playTone(freq,time,duration,volume=0.09){
+
+  const ctx=audioCtx;
+
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+
+  const filter=ctx.createBiquadFilter();
+
+  filter.type="lowpass";
+  filter.frequency.value=1800;
+
+  osc.type="triangle";
+  osc.frequency.setValueAtTime(freq,time);
+
+  gain.gain.setValueAtTime(0.0001,time);
+  gain.gain.exponentialRampToValueAtTime(volume,time+0.04);
+  gain.gain.exponentialRampToValueAtTime(volume*0.35,time+duration*0.45);
+  gain.gain.exponentialRampToValueAtTime(0.0001,time+duration);
+
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(time);
+  osc.stop(time+duration+0.05);
+}
+
+function playSoftPiano(){
+
+  if(!audioCtx || audioCtx.state==="closed")return;
+
+  const now=audioCtx.currentTime;
+  const step=musicStep%16;
+
+  /* Main melody */
+
+  const note=melody[step][0];
+
+  playTone(note,now,1.1,0.045);
+
+  /* Every four steps play a soft chord */
+
+  if(step%4===0){
+
+    const chord=chords[Math.floor(step/4)%4];
+
+    chord.forEach((freq,i)=>{
+      playTone(freq,now,2.8,0.018);
+    });
+
+    /* Soft bass */
+
+    playTone(chord[0]/2,now,3.2,0.025);
+  }
+
+  musicStep++;
+
+  musicTimer=setTimeout(playSoftPiano,1500);
+}
+
+async function toggleMusic(){
+
+  if(!audioCtx){
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  }
+
+  if(audioCtx.state==="suspended"){
+    await audioCtx.resume();
+  }
+
+  if(!musicPlaying){
+
+    musicPlaying=true;
+    musicStep=0;
+    playSoftPiano();
+
+    musicBtn.classList.add("playing");
+    musicBtn.innerHTML="♫ Playing soft piano";
+
+  }else{
+
+    musicPlaying=false;
+    clearTimeout(musicTimer);
+
+    musicBtn.classList.remove("playing");
+    musicBtn.innerHTML="♫ Play soft piano";
+  }
+}
+
+musicBtn.addEventListener("click",toggleMusic);
+
+/* PHOTO */
+
+let photoData="";
+
+$("photo").addEventListener("change",async e=>{
+
   const file=e.target.files[0];
-  if(!file) return;
+
+  if(!file)return;
 
   if(!file.type.startsWith("image/")){
     alert("Please upload an image.");
@@ -484,23 +688,33 @@ $("photo").addEventListener("change", async e=>{
   }
 
   try{
+
     photoData=await compressImage(file);
+
     $("preview").src=photoData;
     $("preview").style.display="block";
+
   }catch(err){
+
     alert("Foto gagal diproses.");
   }
 });
 
 function compressImage(file){
+
   return new Promise((resolve,reject)=>{
+
     const img=new Image();
     const url=URL.createObjectURL(file);
 
     img.onload=()=>{
+
       const canvas=document.createElement("canvas");
+
       const max=320;
-      let w=img.width,h=img.height;
+
+      let w=img.width;
+      let h=img.height;
 
       if(w>h && w>max){
         h=h*(max/w);
@@ -514,9 +728,11 @@ function compressImage(file){
       canvas.height=h;
 
       const ctx=canvas.getContext("2d");
+
       ctx.drawImage(img,0,0,w,h);
 
       URL.revokeObjectURL(url);
+
       resolve(canvas.toDataURL("image/jpeg",0.45));
     };
 
@@ -529,12 +745,18 @@ function compressImage(file){
   });
 }
 
+/* LINK GENERATOR */
+
 function encodeLetter(data){
+
   const bytes=new TextEncoder().encode(JSON.stringify(data));
+
   let binary="";
+
   for(let i=0;i<bytes.length;i++){
     binary+=String.fromCharCode(bytes[i]);
   }
+
   return btoa(binary)
     .replace(/\+/g,"-")
     .replace(/\//g,"_")
@@ -542,22 +764,30 @@ function encodeLetter(data){
 }
 
 function decodeLetter(str){
+
   str=str.replace(/-/g,"+").replace(/_/g,"/");
+
   str+="=".repeat((4-str.length%4)%4);
+
   const binary=atob(str);
+
   const bytes=new Uint8Array(binary.length);
+
   for(let i=0;i<binary.length;i++){
     bytes[i]=binary.charCodeAt(i);
   }
+
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
 $("createBtn").addEventListener("click",()=>{
+
   const sender=$("sender").value.trim();
   const receiver=$("receiver").value.trim();
   const message=$("message").value.trim();
 
-  if(!sender || !receiver || !message){
+  if(!sender||!receiver||!message){
+
     alert("Isi nama pengirim, penerima, dan surat terlebih dahulu ♡");
     return;
   }
@@ -570,106 +800,175 @@ $("createBtn").addEventListener("click",()=>{
   };
 
   try{
+
     const encoded=encodeLetter(data);
-    const link=location.origin+location.pathname+"#letter="+encoded;
+
+    const link=location.origin+
+      location.pathname+
+      "#letter="+encoded;
 
     if(link.length>60000){
-      alert("Link terlalu panjang. Coba kurangi ukuran foto atau panjang surat.");
+
+      alert("Link terlalu panjang. Kurangi ukuran foto atau panjang surat.");
       return;
     }
 
-    currentLetter=data;
     $("shareLink").value=link;
+
     $("creator").classList.add("hidden");
     $("result").classList.remove("hidden");
+
   }catch(err){
+
     alert("Surat gagal dibuat.");
   }
 });
 
+/* COPY LINK */
+
 $("copyBtn").addEventListener("click",async()=>{
+
   try{
+
     await navigator.clipboard.writeText($("shareLink").value);
+
     $("copyBtn").textContent="Copied! ♡";
-    setTimeout(()=> $("copyBtn").textContent="Copy my letter link ♡",2000);
+
+    setTimeout(()=>{
+      $("copyBtn").textContent="Copy my letter link ♡";
+    },2000);
+
   }catch(e){
+
     $("shareLink").select();
+
     document.execCommand("copy");
+
     alert("Link disalin!");
   }
 });
 
+/* PREVIEW */
+
 $("openBtn").addEventListener("click",()=>{
-  if(currentLetter){
-    renderLetter(currentLetter);
-  }
+
+  renderLetter(decodeLetter(
+    $("shareLink").value.split("#letter=")[1]
+  ));
 });
 
 $("backBtn").addEventListener("click",()=>{
+
   $("result").classList.add("hidden");
   $("creator").classList.remove("hidden");
 });
 
+/* LETTER */
+
 function renderLetter(data){
+
   $("creator").classList.add("hidden");
   $("result").classList.add("hidden");
   $("reader").classList.remove("hidden");
 
-  $("greeting").textContent="A little something for "+data.receiver+" ♡";
-  $("paperTo").textContent="Dear "+data.receiver+",";
+  $("greeting").textContent=
+    "A little something for "+data.receiver+" ♡";
+
+  $("paperTo").textContent=
+    "Dear "+data.receiver+",";
+
   $("paperText").textContent=data.message;
-  $("signature").textContent="With love, "+data.sender;
+
+  $("signature").textContent=
+    "With love, "+data.sender;
 
   if(data.photo){
+
     $("paperPhoto").src=data.photo;
     $("paperPhoto").classList.remove("hidden");
+
   }else{
+
     $("paperPhoto").classList.add("hidden");
   }
 
   $("envelope").classList.remove("open");
   $("paper").classList.remove("opened");
+
   $("tapText").style.display="block";
+  $("tapText").textContent="tap the envelope to open ♡";
 }
 
+/* OPEN ENVELOPE */
+
 $("envelope").addEventListener("click",()=>{
-  if($("envelope").classList.contains("open")) return;
+
+  if($("envelope").classList.contains("open"))return;
 
   $("envelope").classList.add("open");
+
   $("tapText").textContent="your letter is opening... ♡";
 
+  /* Start the music only if the reader chooses */
+
   setTimeout(()=>{
+
     $("paper").classList.add("opened");
+
     $("tapText").style.display="none";
-    $("paper").scrollIntoView({behavior:"smooth",block:"start"});
+
+    $("paper").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
   },700);
 });
 
+/* CLOSE LETTER */
+
 $("closeLetter").addEventListener("click",()=>{
+
   $("envelope").classList.remove("open");
   $("paper").classList.remove("opened");
+
   $("tapText").style.display="block";
   $("tapText").textContent="tap the envelope to open ♡";
-  $("reader").scrollIntoView({behavior:"smooth"});
+
+  $("reader").scrollIntoView({
+    behavior:"smooth"
+  });
 });
 
+/* READ SHARED LINK */
+
 function loadFromHash(){
+
   const hash=location.hash;
 
   if(hash.startsWith("#letter=")){
+
     try{
+
       const data=decodeLetter(hash.slice(8));
+
       renderLetter(data);
+
     }catch(e){
+
       $("reader").classList.add("hidden");
       $("creator").classList.remove("hidden");
+
       alert("Link surat tidak valid atau rusak.");
     }
   }
 }
 
 loadFromHash();
+
 window.addEventListener("hashchange",loadFromHash);
+
 </script>
+
 </body>
 </html>
