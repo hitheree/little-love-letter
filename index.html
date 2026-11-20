@@ -1,556 +1,1251 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>lovebug ♡</title>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<title>little love club ♡</title>
 
 <style>
-{box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap');
 
 :root {
-  --pink: #e8a0b6;
-  --dark: #92566c;
-  --soft: #fff1f5;
+  --pink: #f5b9cc;
+  --darkpink: #cb7795;
+  --softpink: #fff0f5;
+  --cream: #fffaf0;
+  --brown: #765460;
+  --border: #f1d5df;
 }
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--soft);
-  color: var(--dark);
+  background: var(--softpink);
+  color: var(--brown);
   font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-body::before, body::after {
-  content: "♡";
+button, input, textarea { font-family: inherit; }
+
+button {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover { transform: translateY(-2px); }
+
+button:active { transform: scale(.96); }
+
+.background-decor {
   position: fixed;
-  font-size: 100px;
-  color: #f1c8d6;
-  opacity: .3;
+  inset: 0;
+  pointer-events: none;
   z-index: -1;
+  overflow: hidden;
 }
 
-body::before {
-  top: 10px;
-  left: 15px;
+.floating {
+  position: absolute;
+  opacity: .35;
+  animation: float 5s ease-in-out infinite;
 }
 
-body::after {
-  bottom: 10px;
-  right: 15px;
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-20px) rotate(8deg); }
 }
 
-.wrap {
-  width: min(92%, 520px);
-  margin: 35px auto;
+.container {
+  max-width: 950px;
+  margin: auto;
+  padding: 24px 18px 60px;
 }
 
-.card {
-  background: white;
-  border: 1px solid #f2d6df;
-  border-radius: 28px;
-  padding: 30px;
-  box-shadow: 0 15px 45px #dba7b530;
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-h1, h2 {
+.brand {
   font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--darkpink);
+}
+
+.small-label {
+  font-size: 11px;
+  color: #b58b99;
+  letter-spacing: 2px;
+}
+
+.hero {
+  background: var(--cream);
+  border: 2px solid white;
+  border-radius: 30px;
+  padding: 35px 25px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 30px #e7b4c433;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 6vw, 52px);
+  font-weight: 500;
+  margin: 10px 0;
+  color: #c77795;
+}
+
+.hero p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #a77c8a;
+}
+
+.mascot {
+  font-size: 90px;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.hero-btn {
+  border: none;
+  background: var(--pink);
+  color: white;
+  padding: 14px 25px;
+  border-radius: 100px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.sticker {
+  position: absolute;
+  font-size: 28px;
+  user-select: none;
+}
+
+.sticker.one { top: 15px; left: 18px; }
+.sticker.two { bottom: 15px; right: 18px; }
+.sticker.three { top: 15px; right: 18px; }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: #c77795;
+  margin: 40px 0 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.menu-card {
+  background: white;
+  border: 2px solid #fff;
+  border-radius: 23px;
+  padding: 22px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px #e5b6c525;
+  transition: .25s;
+  min-height: 155px;
+}
+
+.menu-card:hover {
+  border-color: var(--pink);
+  transform: translateY(-5px) rotate(-1deg);
+}
+
+.menu-card .emoji {
+  font-size: 36px;
+}
+
+.menu-card h3 {
+  margin: 10px 0 5px;
+  color: #c77795;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
   font-weight: 500;
 }
 
-h1 {
-  text-align: center;
-  font-size: 38px;
-  color: #cc7895;
+.menu-card p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #ad8b96;
+  margin: 0;
 }
 
-.subtitle {
+.panel {
+  display: none;
+  background: white;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  padding: 25px;
+  margin-top: 25px;
+  box-shadow: 0 10px 30px #e5b6c525;
+  animation: appear .3s ease;
+}
+
+.panel.active { display: block; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: #c77795;
+  text-align: center;
+  font-size: 30px;
+}
+
+.panel-desc {
   text-align: center;
   font-size: 13px;
-  color: #b38a99;
+  color: #b18a98;
   line-height: 1.8;
 }
 
-.tag {
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: #d391a8;
+.close {
+  float: right;
+  border: none;
+  background: var(--softpink);
+  color: var(--darkpink);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 17px;
+}
+
+input, textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px;
+  outline: none;
+  background: #fffafb;
+  color: var(--brown);
+  margin-top: 8px;
+}
+
+input:focus, textarea:focus { border-color: var(--darkpink); }
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
 }
 
 label {
   display: block;
   font-size: 13px;
+  margin-top: 17px;
+}
+
+.action {
+  background: var(--pink);
+  border: none;
+  border-radius: 15px;
+  padding: 14px;
+  color: white;
   font-weight: 700;
-  margin: 17px 0 8px;
-}
-
-input, textarea {
   width: 100%;
-  border: 1px solid #efd4de;
-  border-radius: 13px;
-  padding: 13px;
-  background: #fffafb;
-  font-family: inherit;
-  color: var(--dark);
-  outline: none;
+  margin-top: 18px;
 }
 
-input:focus, textarea:focus {
-  border-color: var(--pink);
+.action.secondary {
+  background: #f8e6ec;
+  color: #a7607c;
 }
 
-textarea {
-  min-height: 150px;
-  resize: vertical;
+.status {
+  text-align: center;
+  color: #c77795;
+  font-size: 13px;
+  margin-top: 14px;
   line-height: 1.7;
 }
 
-input[type=file] {
-  font-size: 12px;
-}
-
-button {
-  display: block;
-  width: 100%;
-  border: none;
+.machine {
+  text-align: center;
   padding: 15px;
-  border-radius: 14px;
-  margin-top: 18px;
-  font-family: inherit;
-  font-weight: 700;
+}
+
+.machine-face {
+  font-size: 70px;
+  margin: 15px;
+}
+
+.compliment {
+  background: var(--cream);
+  border: 2px dashed #f1c6d6;
+  border-radius: 20px;
+  padding: 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+  color: #c77795;
+  line-height: 1.7;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.heart-button {
+  background: var(--softpink);
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 22px 8px;
+  font-size: 45px;
   cursor: pointer;
-  transition: .2s;
+  min-height: 105px;
 }
 
-button:hover {
-  transform: translateY(-2px);
+.heart-button:hover { background: #ffe2ec; }
+
+.reveal {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  min-height: 80px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  color: #c77795;
+  line-height: 1.7;
 }
 
-.primary {
-  background: var(--pink);
-  color: white;
+.reason-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-.secondary {
-  background: #fff0f5;
-  color: #a8617c;
+.reason {
+  background: var(--cream);
+  border: 1px solid #f3dce5;
+  border-radius: 16px;
+  padding: 15px;
+  cursor: pointer;
 }
 
-.back {
-  background: transparent;
-  color: #c78da2;
+.reason .reason-text {
+  display: none;
+  margin-top: 10px;
+  color: #b46f8b;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.reason.open .reason-text { display: block; }
+
+.reason-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.reason-header span {
+  color: #c77795;
+}
+
+.letter {
+  background: var(--cream);
+  border: 1px dashed #eac4d4;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 20px;
+}
+
+.letter h3 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  color: #c77795;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.letter-names {
+  text-align: center;
   font-size: 13px;
+  color: #b18a98;
+  margin-bottom: 20px;
 }
 
-.hidden {
-  display: none !important;
+.letter-body {
+  white-space: pre-wrap;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  font-size: 15px;
 }
+
+.letter img {
+  max-width: 100%;
+  max-height: 400px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 15px;
+}
+
+.hidden { display: none !important; }
 
 .footer {
   text-align: center;
-  font-size: 11px;
-  color: #c6a0ad;
-  margin-top: 25px;
+  margin-top: 35px;
+  color: #c49ba8;
+  font-size: 12px;
 }
 
-.envelope {
-  font-size: 100px;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.preview {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 17px;
-  margin-top: 15px;
-}
-
-.paper {
-  background: #fffaf6;
-  border: 1px dashed #e9b9c9;
-  border-radius: 20px;
-  padding: 24px;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-}
-
-.paper-title {
-  font-size: 28px;
-  color: #c56b86;
-}
-
-.paper-message {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-#notice, #noticeLetter {
-  text-align: center;
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c77795;
+  color: white;
+  padding: 13px 20px;
+  border-radius: 100px;
+  display: none;
+  z-index: 99;
   font-size: 13px;
-  line-height: 1.7;
-  margin-top: 15px;
+  box-shadow: 0 5px 20px #b36c8844;
 }
 
-@media(max-width:480px) {
-  .card {
-    padding: 22px;
-  }
+.toast.show { display: block; }
 
-  h1 {
-    font-size: 32px;
-  }
+.confetti {
+  position: fixed;
+  font-size: 25px;
+  pointer-events: none;
+  animation: burst 1.4s forwards;
+  z-index: 100;
 }
+
+@keyframes burst {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-180px) rotate(30deg) scale(.3); }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .menu-card { padding: 18px; }
+  .hero { padding: 28px 15px; }
+  .container { padding: 18px 14px 50px; }
+  .panel { padding: 18px; }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<div class="background-decor" id="decor"></div>
 
-<!-- HOME -->
-<section class="card" id="home">
+<div class="container">
 
-  <p class="tag">A LITTLE CORNER OF THE INTERNET</p>
+<header class="topbar">
+  <div>
+    <div class="brand">little love club ♡</div>
+    <div class="small-label">A LITTLE UNIVERSE OF SWEET THINGS</div>
+  </div>
+  <div style="font-size:25px">🎀</div>
+</header>
 
-  <h1>lovebug ♡</h1>
+<section class="hero">
 
-  <p class="subtitle">
-    little letters, silly feelings,<br>
-    and things you wish to say.
+  <div class="sticker one">✿</div>
+  <div class="sticker two">♡</div>
+  <div class="sticker three">🧸</div>
+
+  <div class="mascot" id="mascot" onclick="petMascot()">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
+
+  <h1>Welcome to my little universe!</h1>
+
+  <p>
+    a tiny corner filled with silly things, little surprises,<br>
+    sweet words and happiness ♡
   </p>
 
-  <div class="envelope">💌</div>
-
-  <p class="subtitle">
-    make a tiny letter for someone<br>
-    or just write whatever your heart wants.
-  </p>
-
-  <button class="primary" onclick="openForm()">
-    make a letter ♡
+  <button class="hero-btn" onclick="showRandomSurprise()">
+    click for a surprise! ✧
   </button>
-
-  <p class="footer">
-    made with a little love and a lot of pink
-  </p>
 
 </section>
 
-<!-- FORM -->
-<section class="card hidden" id="formPage">
+<h2 class="section-title">♡ explore the little things</h2>
 
-  <p class="tag">YOUR LITTLE LETTER</p>
+<div class="grid">
 
-  <h1>write something ♡</h1>
-
-  <p class="subtitle">
-    no pressure, just write whatever you want.
-  </p>
-
-  <label>from ♡</label>
-  <input id="from" maxlength="40" placeholder="your name">
-
-  <label>to ♡</label>
-  <input id="to" maxlength="40" placeholder="someone special">
-
-  <label>title ♡</label>
-  <input id="title" maxlength="80" placeholder="a little title">
-
-  <label>your message ♡</label>
-  <textarea id="message" maxlength="1000"
-    placeholder="write your heart here..."></textarea>
-
-  <label>add a picture ♡</label>
-  <input type="file" id="photo" accept="image/*">
-
-  <img id="preview" class="preview hidden" alt="Photo preview">
-
-  <p class="subtitle" id="photoInfo"></p>
-
-  <button class="primary" id="makeBtn" onclick="makeLetter()">
-    seal my letter ♡
-  </button>
-
-  <button class="back" onclick="goHome()">
-    ← go back
-  </button>
-
-  <div id="notice"></div>
-
-</section>
-
-<!-- LETTER -->
-<section class="card hidden" id="letterPage">
-
-  <p class="tag">OPENED WITH LOVE</p>
-
-  <h1>for you ♡</h1>
-
-  <div class="paper">
-
-    <div id="names"></div>
-
-    <img id="letterImg" class="preview hidden" alt="Letter photo">
-
-    <h2 class="paper-title" id="letterTitle"></h2>
-
-    <div class="paper-message" id="letterMessage"></div>
-
+  <div class="menu-card" onclick="openPanel('letterPanel')">
+    <div class="emoji">💌</div>
+    <h3>Little Letter</h3>
+    <p>Make a tiny letter and share it with someone.</p>
   </div>
 
-  <button class="secondary" onclick="copyCurrentLink()">
-    copy this letter's link ♡
-  </button>
+  <div class="menu-card" onclick="openPanel('complimentPanel')">
+    <div class="emoji">🍓</div>
+    <h3>Compliment Machine</h3>
+    <p>Press the button and receive a sweet little compliment.</p>
+  </div>
 
-  <button class="primary" onclick="openForm()">
-    make your own letter ♡
-  </button>
+  <div class="menu-card" onclick="openPanel('heartPanel')">
+    <div class="emoji">💗</div>
+    <h3>Pick a Heart</h3>
+    <p>Choose a heart to uncover a hidden message.</p>
+  </div>
 
-  <div id="noticeLetter"></div>
+  <div class="menu-card" onclick="openPanel('reasonPanel')">
+    <div class="emoji">🌷</div>
+    <h3>Little Reasons</h3>
+    <p>Open the little boxes and find lovely things.</p>
+  </div>
 
-  <p class="footer">
-    you deserve little things that make you smile ♡
-  </p>
+  <div class="menu-card" onclick="openPanel('fortunePanel')">
+    <div class="emoji">🍀</div>
+    <h3>Fortune Cookie</h3>
+    <p>Get a random wholesome fortune for today.</p>
+  </div>
 
-</section>
+  <div class="menu-card" onclick="openPanel('guestPanel')">
+    <div class="emoji">🐰</div>
+    <h3>Little Guestbook</h3>
+    <p>Leave a little message for the person who shared this.</p>
+  </div>
 
 </div>
 
+<!-- LETTER PANEL -->
+
+<section id="letterPanel" class="panel">
+
+<button class="close" onclick="closePanels()">×</button>
+
+<h2>Make a little letter ♡</h2>
+<p class="panel-desc">write something your heart wants to say.</p>
+
+<label>From</label>
+<input id="from" placeholder="your name..." maxlength="60">
+
+<label>To</label>
+<input id="to" placeholder="someone special..." maxlength="60">
+
+<label>Title</label>
+<input id="title" placeholder="a little note for you..." maxlength="100">
+
+<label>Message</label>
+<textarea id="message" placeholder="write your lovely words here..."></textarea>
+
+<label>Photo (optional)</label>
+<input id="photo" type="file" accept="image/*">
+
+<button class="action" onclick="createLetter()">Create my letter ♡</button>
+
+<div class="status" id="letterStatus"></div>
+
+<div id="letterResult" class="hidden">
+
+<div class="letter">
+  <h3 id="resultTitle"></h3>
+  <div class="letter-names" id="resultNames"></div>
+  <img id="resultPhoto" class="hidden" alt="Photo">
+  <div class="letter-body" id="resultMessage"></div>
+</div>
+
+<button class="action" onclick="copyCurrentLink()">Copy letter link ♡</button>
+
+</div>
+
+</section>
+
+<!-- COMPLIMENT PANEL -->
+
+<section id="complimentPanel" class="panel">
+
+<button class="close" onclick="closePanels()">×</button>
+
+<h2>Compliment Machine 🍓</h2>
+
+<p class="panel-desc">
+  let's see what this tiny machine has for you!
+</p>
+
+<div class="machine">
+  <div class="machine-face">૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა</div>
+  <div class="compliment" id="complimentText">
+    press the button to receive a little sweetness ♡
+  </div>
+</div>
+
+<button class="action" onclick="newCompliment()">Give me a compliment!</button>
+
+</section>
+
+<!-- HEART PANEL -->
+
+<section id="heartPanel" class="panel">
+
+<button class="close" onclick="closePanels()">×</button>
+
+<h2>Pick a Heart ♡</h2>
+
+<p class="panel-desc">
+  each heart contains a tiny secret.
+</p>
+
+<div class="heart-grid">
+
+<button class="heart-button" onclick="pickHeart(0)">💗</button>
+<button class="heart-button" onclick="pickHeart(1)">💖</button>
+<button class="heart-button" onclick="pickHeart(2)">💘</button>
+<button class="heart-button" onclick="pickHeart(3)">💕</button>
+<button class="heart-button" onclick="pickHeart(4)">💝</button>
+<button class="heart-button" onclick="pickHeart(5)">❤️</button>
+
+</div>
+
+<div class="reveal" id="heartReveal">
+  choose one! ♡
+</div>
+
+<button class="action secondary" onclick="resetHearts()">Pick again</button>
+
+</section>
+
+<!-- REASONS PANEL -->
+
+<section id="reasonPanel" class="panel">
+
+<button class="close" onclick="closePanels()">×</button>
+
+<h2>Little Reasons 🌷</h2>
+
+<p class="panel-desc">
+  click each card to unfold a tiny thought.
+</p>
+
+<div class="reason-list" id="reasonList">
+
+<div class="reason" onclick="toggleReason(this)">
+  <div class="reason-header">
+    <span>♡ a little reminder</span><span>＋</span>
+  </div>
+  <div class="reason-text">
+    You deserve kindness, even on ordinary days when nothing special happens.
+  </div>
+</div>
+
+<div class="reason" onclick="toggleReason(this)">
+  <div class="reason-header">
+    <span>♡ take your time</span><span>＋</span>
+  </div>
+  <div class="reason-text">
+    You don't need to figure everything out at once. Small steps still count.
+  </div>
+</div>
+
+<div class="reason" onclick="toggleReason(this)">
+  <div class="reason-header">
+    <span>♡ little things</span><span>＋</span>
+  </div>
+  <div class="reason-text">
+    Your favorite song, a warm drink, a funny little moment. Happiness can hide in simple things.
+  </div>
+</div>
+
+<div class="reason" onclick="toggleReason(this)">
+  <div class="reason-header">
+    <span>♡ for rainy days</span><span>＋</span>
+  </div>
+  <div class="reason-text">
+    A bad day doesn't mean a bad life. Tomorrow can bring a new little chapter.
+  </div>
+</div>
+
+<div class="reason" onclick="toggleReason(this)">
+  <div class="reason-header">
+    <span>♡ just because</span><span>＋</span>
+  </div>
+  <div class="reason-text">
+    Somewhere in this world, there are still new places, stories, laughter and lovely things waiting to be discovered.
+  </div>
+</div>
+
+</div>
+
+</section>
+
+<!-- FORTUNE PANEL -->
+
+<section id="fortunePanel" class="panel">
+
+<button class="close" onclick="closePanels()">×</button>
+
+<h2>Fortune Cookie 🍀</h2>
+
+<p class="panel-desc">
+  crack open a little cookie and see your message.
+</p>
+
+<div class="machine-face" style="text-align:center">🥠</div>
+
+<div class="reveal" id="fortuneText">
+  your fortune is waiting...
+</div>
+
+<button class="action" onclick="newFortune()">Open my cookie ♡</button>
+
+</section>
+
+<!-- GUESTBOOK -->
+
+<section id="guestPanel" class="panel">
+
+<button class="close" onclick="closePanels()">×</button>
+
+<h2>Little Guestbook 🐰</h2>
+
+<p class="panel-desc">
+  leave a little message on this device.
+</p>
+
+<label>Your name</label>
+<input id="guestName" placeholder="your name..." maxlength="40">
+
+<label>Your message</label>
+<textarea id="guestMessage" placeholder="leave a little note..." maxlength="500"></textarea>
+
+<button class="action" onclick="saveGuest()">Leave a note ♡</button>
+
+<div id="guestStatus" class="status"></div>
+
+<div id="guestNotes"></div>
+
+</section>
+
+<div class="footer">
+  made with tiny bits of love & sugar ♡
+  <br>little love club
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
 
-// PAGE ELEMENTS
-const home = document.getElementById("home");
-const formPage = document.getElementById("formPage");
-const letterPage = document.getElementById("letterPage");
-const photoInput = document.getElementById("photo");
+// Floating decorations
+const decor = document.getElementById('decor');
 
-let originalPhoto = "";
+const decorations = ['♡','✿','୨୧','☆','🍓','✧','🌷','🎀'];
 
-// NAVIGATION
-function hideAll() {
-  home.classList.add("hidden");
-  formPage.classList.add("hidden");
-  letterPage.classList.add("hidden");
+for (let i = 0; i < 22; i++) {
+  const el = document.createElement('div');
+  el.className = 'floating';
+  el.textContent = decorations[Math.floor(Math.random()*decorations.length)];
+  el.style.left = Math.random()*100 + '%';
+  el.style.top = Math.random()*100 + '%';
+  el.style.fontSize = (18+Math.random()*25)+'px';
+  el.style.animationDelay = Math.random()*4+'s';
+  decor.appendChild(el);
 }
 
-function openForm() {
-  hideAll();
-  formPage.classList.remove("hidden");
-  document.getElementById("notice").textContent = "";
+// Toast
+function toast(text) {
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-function goHome() {
-  hideAll();
-  home.classList.remove("hidden");
+// Panel control
+function openPanel(id) {
+  closePanels();
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
 }
 
-// PHOTO UPLOAD
-photoInput.addEventListener("change", function() {
+function closePanels() {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+}
 
-  const file = photoInput.files[0];
-  const preview = document.getElementById("preview");
-  const info = document.getElementById("photoInfo");
+// Mascot
+function petMascot() {
+  const faces = [
+    '૮ ˶ᵔ ᵕ ᵔ˶ ა',
+    '૮₍ ˶•⤙•˶ ₎ა',
+    '૮₍ ˃ ⤙ ˂ ₎ა',
+    '૮₍ ´ ꒳ `₎ა',
+    '૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა'
+  ];
 
-  originalPhoto = "";
-  preview.classList.add("hidden");
-  info.textContent = "";
+  document.getElementById('mascot').textContent =
+    faces[Math.floor(Math.random()*faces.length)];
 
-  if (!file) return;
+  burst();
+  toast('boop! ♡');
+}
 
-  if (!file.type.startsWith("image/")) {
-    alert("Please choose an image ♡");
-    photoInput.value = "";
+// Surprise
+function showRandomSurprise() {
+  const surprises = [
+    'you found a tiny happiness! ♡',
+    'sending you a virtual strawberry 🍓',
+    'today is a good day for a little kindness 🌷',
+    'you unlocked a secret hug from the universe ♡',
+    'here is a tiny reminder to be gentle with yourself ✧',
+    'you deserve moments that make you smile 🧸',
+    'a little sparkle just for you ✨'
+  ];
+
+  toast(surprises[Math.floor(Math.random()*surprises.length)]);
+  burst();
+}
+
+// Compliments
+const compliments = [
+  'You have a lovely way of making ordinary moments feel special.',
+  'Your curiosity is a beautiful thing.',
+  'You deserve to be appreciated for more than what you accomplish.',
+  'You are allowed to learn, grow and change.',
+  'You bring your own unique perspective to the world.',
+  'Your kindness can make a difference in someone’s day.',
+  'You deserve peaceful moments and joyful little surprises.',
+  'You are more than a bad day or a difficult moment.',
+  'Keep being curious about all the lovely things in life.',
+  'Your ideas deserve room to grow.',
+  'You deserve to feel proud of the little steps you take.',
+  'The world is a little more interesting with different people in it.',
+  'You can always start again, even with something small.',
+  'There is no need to rush your own story.',
+  'Your laughter is worth making room for.',
+  'You deserve good friendships and thoughtful conversations.'
+];
+
+function newCompliment() {
+  document.getElementById('complimentText').textContent =
+    compliments[Math.floor(Math.random()*compliments.length)];
+
+  burst();
+}
+
+// Hearts
+const heartMessages = [
+  'A little reminder: you are allowed to rest without feeling guilty. ♡',
+  'Sending you a tiny virtual strawberry! 🍓',
+  'Keep a little room in your day for something that makes you happy.',
+  'You deserve friendships that feel safe and kind.',
+  'May something unexpectedly nice happen to you today. ✧',
+  'Remember to appreciate the small victories, too. 🌷'
+];
+
+let selectedHearts = [];
+
+function pickHeart(index) {
+  if (selectedHearts.includes(index)) {
+    toast('you already opened this heart! ♡');
     return;
   }
 
-  info.textContent = "loading your original picture... ♡";
+  selectedHearts.push(index);
 
-  const reader = new FileReader();
+  document.getElementById('heartReveal').textContent =
+    heartMessages[index];
 
-  reader.onload = function() {
+  const buttons = document.querySelectorAll('.heart-button');
+  buttons[index].textContent = '🤍';
+  buttons[index].disabled = true;
 
-    originalPhoto = reader.result;
-
-    preview.src = originalPhoto;
-    preview.classList.remove("hidden");
-
-    info.textContent =
-      "original picture loaded ♡";
-
-  };
-
-  reader.onerror = function() {
-    info.textContent = "unable to read this picture.";
-  };
-
-  reader.readAsDataURL(file);
-
-});
-
-// DISPLAY LETTER
-function showLetter(data) {
-
-  hideAll();
-
-  letterPage.classList.remove("hidden");
-
-  document.getElementById("names").textContent =
-    "from " + (data.from || "someone") +
-    " ♡\nto " + (data.to || "you") + "\n\n";
-
-  document.getElementById("letterTitle").textContent =
-    data.title || "a little letter";
-
-  document.getElementById("letterMessage").textContent =
-    data.message || "";
-
-  const img = document.getElementById("letterImg");
-
-  if (data.photo) {
-    img.src = data.photo;
-    img.classList.remove("hidden");
-  } else {
-    img.classList.add("hidden");
-    img.removeAttribute("src");
-  }
-
+  burst();
 }
 
-// CREATE LETTER
-function makeLetter() {
+function resetHearts() {
+  selectedHearts = [];
 
-  const from = document.getElementById("from").value.trim();
-  const to = document.getElementById("to").value.trim();
-  const title = document.getElementById("title").value.trim();
-  const message = document.getElementById("message").value.trim();
-  const notice = document.getElementById("notice");
+  document.querySelectorAll('.heart-button').forEach((button, index) => {
+    button.textContent = ['💗','💖','💘','💕','💝','❤️'][index];
+    button.disabled = false;
+  });
 
-  notice.textContent = "";
+  document.getElementById('heartReveal').textContent = 'choose one! ♡';
+}
 
-  if (!message) {
-    notice.textContent = "write something first ♡";
+// Reasons
+function toggleReason(el) {
+  el.classList.toggle('open');
+
+  const symbol = el.querySelector('.reason-header span:last-child');
+  symbol.textContent = el.classList.contains('open') ? '−' : '＋';
+}
+
+// Fortune
+const fortunes = [
+  'A small opportunity may lead to a lovely new experience.',
+  'Today is a good day to try something you have been curious about.',
+  'A little kindness can travel further than you think.',
+  'You might discover something wonderful in an ordinary moment.',
+  'Take your time. Good things can grow slowly.',
+  'A new chapter does not have to begin with a big step.',
+  'A happy surprise might be hiding in your next conversation.',
+  'Your future is not limited to the things you already know.',
+  'Keep an open mind. New ideas can bring new possibilities.',
+  'Make room for laughter today.'
+];
+
+function newFortune() {
+  document.getElementById('fortuneText').textContent =
+    fortunes[Math.floor(Math.random()*fortunes.length)];
+
+  burst();
+}
+
+// Guestbook local storage
+// Notes are saved only on the current device/browser.
+
+function saveGuest() {
+  const name = document.getElementById('guestName').value.trim();
+  const message = document.getElementById('guestMessage').value.trim();
+
+  if (!name || !message) {
+    document.getElementById('guestStatus').textContent =
+      'Please fill in your name and message ♡';
     return;
   }
 
-  const data = {
-    from: from,
-    to: to,
-    title: title,
-    message: message,
-    photo: originalPhoto
-  };
+  try {
+    let notes = JSON.parse(localStorage.getItem('littleGuestbook') || '[]');
+
+    notes.unshift({ name, message });
+
+    if (notes.length > 30) notes = notes.slice(0,30);
+
+    localStorage.setItem('littleGuestbook', JSON.stringify(notes));
+
+    document.getElementById('guestName').value = '';
+    document.getElementById('guestMessage').value = '';
+
+    document.getElementById('guestStatus').textContent =
+      'your little note has been saved! ♡';
+
+    renderGuests();
+  } catch(e) {
+    document.getElementById('guestStatus').textContent =
+      'Storage is unavailable on this browser.';
+  }
+}
+
+function renderGuests() {
+  const box = document.getElementById('guestNotes');
+  box.innerHTML = '';
+
+  try {
+    const notes = JSON.parse(localStorage.getItem('littleGuestbook') || '[]');
+
+    notes.forEach(note => {
+      const card = document.createElement('div');
+      card.className = 'reason';
+      card.style.cursor = 'default';
+
+      const name = document.createElement('strong');
+      name.textContent = '♡ ' + note.name;
+
+      const text = document.createElement('div');
+      text.style.marginTop = '10px';
+      text.style.lineHeight = '1.7';
+      text.textContent = note.message;
+
+      card.append(name, text);
+      box.appendChild(card);
+    });
+  } catch(e) {}
+}
+
+// Celebration
+function burst() {
+  const emojis = ['💗','✨','🌷','🎀','♡','🍓'];
+
+  for (let i = 0; i < 7; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = (30+Math.random()*40)+'%';
+    el.style.top = '50%';
+
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 1400);
+  }
+}
+
+// Compressed shared letters
+
+function toBase64Url(bytes) {
+  let binary = '';
+  const chunk = 8192;
+
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i+chunk));
+  }
+
+  return btoa(binary)
+    .replace(/\+/g,'-')
+    .replace(/\//g,'_')
+    .replace(/=+$/g,'');
+}
+
+function fromBase64Url(str) {
+  str = str.replace(/-/g,'+').replace(/_/g,'/');
+
+  while (str.length%4) str+='=';
+
+  const binary = atob(str);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let i=0;i<binary.length;i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+
+  return bytes;
+}
+
+async function gzip(bytes) {
+  if (!window.CompressionStream) {
+    throw new Error('Please use a newer browser.');
+  }
+
+  const stream = new Blob([bytes])
+    .stream()
+    .pipeThrough(new CompressionStream('gzip'));
+
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function ungzip(bytes) {
+  const stream = new Blob([bytes])
+    .stream()
+    .pipeThrough(new DecompressionStream('gzip'));
+
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function encode(data) {
+  const bytes = new TextEncoder().encode(JSON.stringify(data));
+  return toBase64Url(await gzip(bytes));
+}
+
+async function decode(encoded) {
+  const bytes = fromBase64Url(encoded);
+  const result = await ungzip(bytes);
+
+  return JSON.parse(new TextDecoder().decode(result));
+}
+
+// Photo optimization
+async function compressPhoto(file, maxLength, data) {
+  if (!file) return null;
+
+  const img = await createImageBitmap(file);
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  let w = img.width;
+  let h = img.height;
+
+  const maxSize = 1400;
+
+  if (Math.max(w,h)>maxSize) {
+    const ratio = maxSize/Math.max(w,h);
+    w = Math.round(w*ratio);
+    h = Math.round(h*ratio);
+  }
+
+  for (let attempt=0;attempt<8;attempt++) {
+
+    canvas.width=w;
+    canvas.height=h;
+
+    ctx.fillStyle='#fff';
+    ctx.fillRect(0,0,w,h);
+    ctx.drawImage(img,0,0,w,h);
+
+    for (let q=.92;q>=.45;q-=.10) {
+
+      const blob=await new Promise(resolve =>
+        canvas.toBlob(resolve,'image/jpeg',q)
+      );
+
+      if (!blob) continue;
+
+      const photo=await new Promise(resolve=>{
+        const reader=new FileReader();
+        reader.onload=()=>resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+
+      const test=await encode({...data,photo});
+
+      if ((location.origin+location.pathname+'?letter='+test).length<=7500) {
+        img.close();
+        return photo;
+      }
+    }
+
+    w=Math.round(w*.75);
+    h=Math.round(h*.75);
+  }
+
+  img.close();
+
+  throw new Error('The photo is too large. Try another photo.');
+}
+
+// Letter creation
+async function createLetter() {
+
+  const from=document.getElementById('from').value.trim();
+  const to=document.getElementById('to').value.trim();
+  const title=document.getElementById('title').value.trim();
+  const message=document.getElementById('message').value.trim();
+  const file=document.getElementById('photo').files[0];
+
+  const status=document.getElementById('letterStatus');
+
+  if(!to || !message) {
+    status.textContent='Please fill in the recipient and message ♡';
+    return;
+  }
+
+  status.textContent='Preparing your little letter...';
 
   try {
 
-    const json = JSON.stringify(data);
+    const data={
+      from,
+      to,
+      title:title||'A little letter for you ♡',
+      message,
+      photo:null
+    };
 
-    // UTF-8 Base64
-    const encoded = btoa(
-      unescape(encodeURIComponent(json))
-    );
+    if(file) data.photo=await compressPhoto(file,7500,data);
 
-    // URL-safe Base64
-    const safeEncoded = encoded
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=+$/g, "");
+    const encoded=await encode(data);
 
-    const link = location.origin + location.pathname +
-      "?letter=" + safeEncoded;
+    const url=location.origin+location.pathname+'?letter='+encoded;
 
-    // No artificial payload limit
-    history.pushState(null, "", "?letter=" + safeEncoded);
+    if(url.length>7500) {
+      throw new Error('The message is too long. Please shorten it.');
+    }
 
-    showLetter(data);
+    history.pushState({},'',url);
 
-  } catch (error) {
+    displayLetter(data);
 
-    notice.textContent =
-      "Your browser could not create the link. Try another picture.";
+    status.textContent='Your letter is ready! ♡';
 
+    document.getElementById('letterResult').classList.remove('hidden');
+
+    burst();
+
+  } catch(e) {
+
+    status.textContent=e.message||'Something went wrong.';
+
+  }
+}
+
+function displayLetter(data) {
+
+  document.getElementById('resultTitle').textContent=
+    data.title||'A little letter for you ♡';
+
+  document.getElementById('resultNames').textContent=
+    (data.from||'Someone')+' ♡ '+(data.to||'');
+
+  document.getElementById('resultMessage').textContent=data.message;
+
+  const img=document.getElementById('resultPhoto');
+
+  if(data.photo) {
+    img.src=data.photo;
+    img.classList.remove('hidden');
+  } else {
+    img.classList.add('hidden');
+    img.removeAttribute('src');
   }
 
 }
 
-// COPY LINK
 async function copyCurrentLink() {
 
-  const notice = document.getElementById("noticeLetter");
-
   try {
-
     await navigator.clipboard.writeText(location.href);
+    toast('Link copied! ♡');
+  } catch(e) {
+    const temp=document.createElement('textarea');
+    temp.value=location.href;
 
-    notice.textContent = "link copied! share it with someone ♡";
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand('copy');
+    temp.remove();
 
-  } catch (error) {
-
-    notice.textContent =
-      "Copy failed. Copy the link from your browser address bar instead.";
-
+    toast('Link copied! ♡');
   }
-
 }
 
-// READ LINK
-function loadLetter() {
+// Shared link
+async function loadShared() {
 
-  const params = new URLSearchParams(location.search);
-  const raw = params.get("letter");
+  const params=new URLSearchParams(location.search);
+  const encoded=params.get('letter');
 
-  if (!raw) {
-    home.classList.remove("hidden");
-    return;
-  }
+  if(!encoded) return;
+
+  openPanel('letterPanel');
 
   try {
 
-    let encoded = raw
-      .replace(/-/g, "+")
-      .replace(/_/g, "/");
+    const data=await decode(encoded);
 
-    while (encoded.length % 4) {
-      encoded += "=";
-    }
+    displayLetter(data);
 
-    const decoded = decodeURIComponent(
-      escape(atob(encoded))
-    );
+    document.getElementById('letterResult').classList.remove('hidden');
 
-    const data = JSON.parse(decoded);
+    document.getElementById('letterStatus').textContent='';
 
-    if (
-      !data ||
-      typeof data.message !== "string" ||
-      typeof data.from !== "string" ||
-      typeof data.to !== "string" ||
-      typeof data.title !== "string" ||
-      typeof data.photo !== "string"
-    ) {
-      throw new Error("Invalid data");
-    }
+  } catch(e) {
 
-    showLetter(data);
-
-  } catch (error) {
-
-    home.classList.remove("hidden");
-
-    alert("This letter seems to be invalid ♡");
+    document.getElementById('letterStatus').textContent=
+      'This letter could not be opened.';
 
   }
-
 }
 
-// INITIAL LOAD
-loadLetter();
+renderGuests();
+loadShared();
 
 </script>
 
