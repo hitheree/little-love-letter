@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lovebug ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+<style>
+{box-sizing: border-box;
+}
+
+:root {
+  --pink: #e8a0b6;
+  --dark: #92566c;
+  --soft: #fff1f5;
+}
+
+body {
+  margin: 0;
+  background: var(--soft);
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+body::before, body::after {
+  content: "♡";
+  position: fixed;
+  font-size: 100px;
+  color: #f1c8d6;
+  opacity: .3;
+  z-index: -1;
+}
+
+body::before {
+  top: 10px;
+  left: 15px;
+}
+
+body::after {
+  bottom: 10px;
+  right: 15px;
+}
+
+.wrap {
+  width: min(92%, 520px);
+  margin: 35px auto;
+}
+
+.card {
+  background: white;
+  border: 1px solid #f2d6df;
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 15px 45px #dba7b530;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+h1 {
+  text-align: center;
+  font-size: 38px;
+  color: #cc7895;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #b38a99;
+  line-height: 1.8;
+}
+
+.tag {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #d391a8;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 17px 0 8px;
+}
+
+input, textarea {
+  width: 100%;
+  border: 1px solid #efd4de;
+  border-radius: 13px;
+  padding: 13px;
+  background: #fffafb;
+  font-family: inherit;
+  color: var(--dark);
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--pink);
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+input[type=file] {
+  font-size: 12px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 15px;
+  border-radius: 14px;
+  margin-top: 18px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.primary {
+  background: var(--pink);
+  color: white;
+}
+
+.secondary {
+  background: #fff0f5;
+  color: #a8617c;
+}
+
+.back {
+  background: transparent;
+  color: #c78da2;
+  font-size: 13px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: #c6a0ad;
+  margin-top: 25px;
+}
+
+.envelope {
+  font-size: 100px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 17px;
+  margin-top: 15px;
+}
+
+.paper {
+  background: #fffaf6;
+  border: 1px dashed #e9b9c9;
+  border-radius: 20px;
+  padding: 24px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.paper-title {
+  font-size: 28px;
+  color: #c56b86;
+}
+
+.paper-message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#notice, #noticeLetter {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 15px;
+}
+
+@media(max-width:480px) {
+  .card {
+    padding: 22px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- HOME -->
+<section class="card" id="home">
+
+  <p class="tag">A LITTLE CORNER OF THE INTERNET</p>
+
+  <h1>lovebug ♡</h1>
+
+  <p class="subtitle">
+    little letters, silly feelings,<br>
+    and things you wish to say.
+  </p>
+
+  <div class="envelope">💌</div>
+
+  <p class="subtitle">
+    make a tiny letter for someone<br>
+    or just write whatever your heart wants.
+  </p>
+
+  <button class="primary" onclick="openForm()">
+    make a letter ♡
+  </button>
+
+  <p class="footer">
+    made with a little love and a lot of pink
+  </p>
+
+</section>
+
+<!-- FORM -->
+<section class="card hidden" id="formPage">
+
+  <p class="tag">YOUR LITTLE LETTER</p>
+
+  <h1>write something ♡</h1>
+
+  <p class="subtitle">
+    no pressure, just write whatever you want.
+  </p>
+
+  <label>from ♡</label>
+  <input id="from" maxlength="40" placeholder="your name">
+
+  <label>to ♡</label>
+  <input id="to" maxlength="40" placeholder="someone special">
+
+  <label>title ♡</label>
+  <input id="title" maxlength="80" placeholder="a little title">
+
+  <label>your message ♡</label>
+  <textarea id="message" maxlength="1000"
+    placeholder="write your heart here..."></textarea>
+
+  <label>add a picture ♡</label>
+  <input type="file" id="photo" accept="image/*">
+
+  <img id="preview" class="preview hidden" alt="Photo preview">
+
+  <p class="subtitle" id="photoInfo"></p>
+
+  <button class="primary" id="makeBtn" onclick="makeLetter()">
+    seal my letter ♡
+  </button>
+
+  <button class="back" onclick="goHome()">
+    ← go back
+  </button>
+
+  <div id="notice"></div>
+
+</section>
+
+<!-- LETTER -->
+<section class="card hidden" id="letterPage">
+
+  <p class="tag">OPENED WITH LOVE</p>
+
+  <h1>for you ♡</h1>
+
+  <div class="paper">
+
+    <div id="names"></div>
+
+    <img id="letterImg" class="preview hidden" alt="Letter photo">
+
+    <h2 class="paper-title" id="letterTitle"></h2>
+
+    <div class="paper-message" id="letterMessage"></div>
+
+  </div>
+
+  <button class="secondary" onclick="copyCurrentLink()">
+    copy this letter's link ♡
+  </button>
+
+  <button class="primary" onclick="openForm()">
+    make your own letter ♡
+  </button>
+
+  <div id="noticeLetter"></div>
+
+  <p class="footer">
+    you deserve little things that make you smile ♡
+  </p>
+
+</section>
+
+</div>
+
+<script>
+
+// PAGE ELEMENTS
+const home = document.getElementById("home");
+const formPage = document.getElementById("formPage");
+const letterPage = document.getElementById("letterPage");
+const photoInput = document.getElementById("photo");
+
+let originalPhoto = "";
+
+// NAVIGATION
+function hideAll() {
+  home.classList.add("hidden");
+  formPage.classList.add("hidden");
+  letterPage.classList.add("hidden");
+}
+
+function openForm() {
+  hideAll();
+  formPage.classList.remove("hidden");
+  document.getElementById("notice").textContent = "";
+}
+
+function goHome() {
+  hideAll();
+  home.classList.remove("hidden");
+}
+
+// PHOTO UPLOAD
+photoInput.addEventListener("change", function() {
+
+  const file = photoInput.files[0];
+  const preview = document.getElementById("preview");
+  const info = document.getElementById("photoInfo");
+
+  originalPhoto = "";
+  preview.classList.add("hidden");
+  info.textContent = "";
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please choose an image ♡");
+    photoInput.value = "";
+    return;
+  }
+
+  info.textContent = "loading your original picture... ♡";
+
+  const reader = new FileReader();
+
+  reader.onload = function() {
+
+    originalPhoto = reader.result;
+
+    preview.src = originalPhoto;
+    preview.classList.remove("hidden");
+
+    info.textContent =
+      "original picture loaded ♡";
+
+  };
+
+  reader.onerror = function() {
+    info.textContent = "unable to read this picture.";
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+// DISPLAY LETTER
+function showLetter(data) {
+
+  hideAll();
+
+  letterPage.classList.remove("hidden");
+
+  document.getElementById("names").textContent =
+    "from " + (data.from || "someone") +
+    " ♡\nto " + (data.to || "you") + "\n\n";
+
+  document.getElementById("letterTitle").textContent =
+    data.title || "a little letter";
+
+  document.getElementById("letterMessage").textContent =
+    data.message || "";
+
+  const img = document.getElementById("letterImg");
+
+  if (data.photo) {
+    img.src = data.photo;
+    img.classList.remove("hidden");
+  } else {
+    img.classList.add("hidden");
+    img.removeAttribute("src");
+  }
+
+}
+
+// CREATE LETTER
+function makeLetter() {
+
+  const from = document.getElementById("from").value.trim();
+  const to = document.getElementById("to").value.trim();
+  const title = document.getElementById("title").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const notice = document.getElementById("notice");
+
+  notice.textContent = "";
+
+  if (!message) {
+    notice.textContent = "write something first ♡";
+    return;
+  }
+
+  const data = {
+    from: from,
+    to: to,
+    title: title,
+    message: message,
+    photo: originalPhoto
+  };
+
+  try {
+
+    const json = JSON.stringify(data);
+
+    // UTF-8 Base64
+    const encoded = btoa(
+      unescape(encodeURIComponent(json))
+    );
+
+    // URL-safe Base64
+    const safeEncoded = encoded
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/g, "");
+
+    const link = location.origin + location.pathname +
+      "?letter=" + safeEncoded;
+
+    // No artificial payload limit
+    history.pushState(null, "", "?letter=" + safeEncoded);
+
+    showLetter(data);
+
+  } catch (error) {
+
+    notice.textContent =
+      "Your browser could not create the link. Try another picture.";
+
+  }
+
+}
+
+// COPY LINK
+async function copyCurrentLink() {
+
+  const notice = document.getElementById("noticeLetter");
+
+  try {
+
+    await navigator.clipboard.writeText(location.href);
+
+    notice.textContent = "link copied! share it with someone ♡";
+
+  } catch (error) {
+
+    notice.textContent =
+      "Copy failed. Copy the link from your browser address bar instead.";
+
+  }
+
+}
+
+// READ LINK
+function loadLetter() {
+
+  const params = new URLSearchParams(location.search);
+  const raw = params.get("letter");
+
+  if (!raw) {
+    home.classList.remove("hidden");
+    return;
+  }
+
+  try {
+
+    let encoded = raw
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
+
+    while (encoded.length % 4) {
+      encoded += "=";
+    }
+
+    const decoded = decodeURIComponent(
+      escape(atob(encoded))
+    );
+
+    const data = JSON.parse(decoded);
+
+    if (
+      !data ||
+      typeof data.message !== "string" ||
+      typeof data.from !== "string" ||
+      typeof data.to !== "string" ||
+      typeof data.title !== "string" ||
+      typeof data.photo !== "string"
+    ) {
+      throw new Error("Invalid data");
+    }
+
+    showLetter(data);
+
+  } catch (error) {
+
+    home.classList.remove("hidden");
+
+    alert("This letter seems to be invalid ♡");
+
+  }
+
+}
+
+// INITIAL LOAD
+loadLetter();
+
+</script>
+
+</body>
+</html>
